@@ -35,10 +35,20 @@ typedef struct  s_map_data
     t_data      name;
 }               t_map_data;
 
+typedef struct  s_var_mlx 
+{
+    void        *mlx;
+    void        *win;
+    int         size_map;
+    size_t      size_line_max;
+    int         size_case;
+}               t_var_mlx;
+
 typedef struct  s_g_struct
 {
     t_data      data;
     t_map_data  map_data;
+    t_var_mlx   var_mlx;
 }               t_struct;
 
 

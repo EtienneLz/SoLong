@@ -7,6 +7,7 @@ static void vars_init(t_struct *stru)
     stru->map_data.map = NULL;
     stru->data.res_x = 0;
     stru->data.res_y = 0;
+    
 }
 
 int     main(int argc, char **argv)
