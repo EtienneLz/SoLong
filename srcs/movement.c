@@ -27,14 +27,14 @@ static  int    check_collision(int direction, int axis)
     return (1);
 }
 
-void            move_player(int direction, int axis)
+void            move_player(int direction, int axis, t_struct *stru)
 {
     if (direction == 0)
             return ;
     
     if (check_collision(direction, axis))
     {
-        win_init();
+        win_init(&stru);
         if (axis == 1)
         {
             if (direction > 0)

@@ -76,5 +76,6 @@ void            win_init(t_struct *stru);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int             ft_exit(void);
 void            input_loop(t_struct *stru);
+void            move_player(int direction, int axis, t_struct *stru);
 
 #endif

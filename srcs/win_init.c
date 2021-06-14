@@ -70,22 +70,22 @@ void    draw_player(double d_i, double d_j, t_struct *stru)
 
 void    win_init(t_struct *stru)
 {
-    /*int i;
+    int i;
     int j;
 
-    i = 0;*/ 
+    i = 0; 
     stru->data.img = mlx_new_image(stru->var_mlx.mlx, stru->data.res_x, stru->data.res_y);
     stru->data.addr = mlx_get_data_addr(stru->data.img, &stru->data.bits_per_pixel, &stru->data.line_length, &stru->data.endian);
-    /*while (g_data.map[i])
+    while (stru->map_data.map[i])
     {
         j = 0;
-        while (g_data.map[i][j])
+        while (stru->map_data.map[i][j])
         {
-            draw_square(i, j);
+            draw_square(i, j, &stru);
             j++;
         }
         i++;
-    }*/
+    }
     if (stru->check_flags.init_done == 0)
     {
         stru->check_flags.pos_i = stru->check_flags.s_pos_i;
