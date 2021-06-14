@@ -25,6 +25,7 @@ typedef struct      s_data
     int             endian;
     int             res_x;
     int             res_y;
+    int             fd;
 }                   t_data;
 
 typedef struct      s_map_data
@@ -73,5 +74,7 @@ char	        *ft_save(char *buffer, char *save);
 void            draw_player(double d_i, double d_j, t_struct *stru);
 void            win_init(t_struct *stru);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int             ft_exit(void);
+void            input_loop(t_struct *stru);
 
 #endif

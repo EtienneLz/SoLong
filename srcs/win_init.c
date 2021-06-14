@@ -88,8 +88,8 @@ void    win_init(t_struct *stru)
     }*/
     if (stru->check_flags.init_done == 0)
     {
-        stru->check_flags.pos_i = stru->var_mlx.size_case * stru->check_flags.s_pos_i + stru->var_mlx.size_case / 2 - 4;
-        stru->check_flags.pos_j = stru->var_mlx.size_case * stru->check_flags.s_pos_j + stru->var_mlx.size_case / 2 - 4;
-        //draw_player(g_check_flags.pos_i, g_check_flags.pos_j);
+        stru->check_flags.pos_i = stru->check_flags.s_pos_i;
+        stru->check_flags.pos_j = stru->check_flags.s_pos_j;
+        draw_player(stru->check_flags.pos_i, stru->check_flags.pos_j, &stru);
     }
 }
