@@ -1,10 +1,10 @@
 #include "../includes/solong.h"
 
-void            my_mlx_pixel_put(s_data *data, int x, int y, int color)
+void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
     char    *dst;
 
-    dst = stru->data->addr + (y * stru->data->line_length + x * (stru->data->bits_per_pixel / 8));
+    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
     *(unsigned int*)dst = color;
 }
 
@@ -20,13 +20,13 @@ static void     draw_square(int i, int j, t_struct *stru)
         while (q <= stru->var_mlx.size_case)
         {
             if (stru->map_data.map[i][j] == '1')
-                my_mlx_pixel_put(&stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00999999);
+                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00999999);
             else if (stru->map_data.map[i][j] == '0')
-                my_mlx_pixel_put(&stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
+                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
             else if (stru->map_data.map[i][j] == ' ')
-                my_mlx_pixel_put(&stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00000000);
+                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00000000);
             else
-                my_mlx_pixel_put(&stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
+                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
             q++;
         }
         p++;
@@ -35,8 +35,8 @@ static void     draw_square(int i, int j, t_struct *stru)
 
 void    draw_player(double d_i, double d_j, t_struct *stru)
 {
-    //int p;
-    //int q;
+    int p;
+    int q;
     int j;
     int i;
 
