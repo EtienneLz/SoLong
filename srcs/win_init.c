@@ -33,28 +33,19 @@ static void     draw_square(int i, int j, t_struct *stru)
     }
 }
 
-void    draw_player(double d_i, double d_j, t_struct *stru)
+void    draw_player(int pos_i, int pos_j, t_struct *stru)
 {
     int p;
     int q;
     int j;
     int i;
 
-    if (stru->check_flags.init_done == 0)
-    {
-        j = (stru->var_mlx.size_case * stru->check_flags.s_pos_j + stru->var_mlx.size_case / 2 - 4);
-        i = (stru->var_mlx.size_case * stru->check_flags.s_pos_i + stru->var_mlx.size_case / 2 - 4);
-        stru->check_flags.pos_i = i + 4;
-        stru->check_flags.pos_j = j + 4;
-    }
-    else
-    {
-        j = d_j - 4;
-        i = d_i - 4;
-        stru->check_flags.pos_i = d_i;
-        stru->check_flags.pos_j = d_j;
-    }
-    printf("%f, %f bloup\n", d_i, d_j);
+    j = pos_j - 4;
+    i = pos_i - 4;
+    stru->check_flags.pos_i = pos_i;
+    stru->check_flags.pos_j = pos_j;
+
+    printf("%f, %f bloup\n", pos_i, pos_j);
     p = 0;
     while (p <= 9)
     {
