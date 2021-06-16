@@ -42,15 +42,15 @@ void    draw_player(double d_i, double d_j, t_struct *stru)
 
     if (stru->check_flags.init_done == 0)
     {
-        j = (stru->var_mlx.size_case * stru->check_flags.s_pos_j + stru->var_mlx.size_case / 2 - 4);
-        i = (stru->var_mlx.size_case * stru->check_flags.s_pos_i + stru->var_mlx.size_case / 2 - 4);
-        stru->check_flags.pos_i = i + 4;
-        stru->check_flags.pos_j = j + 4;
+        j = stru->check_flags.s_pos_j;
+        i = stru->check_flags.s_pos_i;
+        stru->check_flags.pos_i = i;
+        stru->check_flags.pos_j = j;
     }
     else
     {
-        j = d_j - 4;
-        i = d_i - 4;
+        j = d_j;
+        i = d_i;
         stru->check_flags.pos_i = d_i;
         stru->check_flags.pos_j = d_j;
     }

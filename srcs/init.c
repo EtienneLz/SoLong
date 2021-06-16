@@ -25,8 +25,8 @@ int     main(int argc, char **argv)
 
         vars_init(&stru);
         ft_file_read(argv[2], &stru);
-        stru->var_mlx.mlx = mlx_init();
-        stru->var_mlx.size_case = stru->data.res_x / stru->map_data.size_line_max;
+        stru.var_mlx.mlx = mlx_init();
+        stru.var_mlx.size_case = stru.data.res_x / stru.map_data.size_line_max;
         input_loop(&stru);
     }
     return (0);
