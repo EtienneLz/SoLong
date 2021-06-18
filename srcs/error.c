@@ -7,19 +7,19 @@ void    ft_error(int code, t_struct *stru)
     {
         close(stru->data.fd);
         write(1, "Configuration invalide\n", 23);
-        ft_free(&stru);
+        ft_free(stru);
     }
     if (code == 2)
     {
         close(stru->data.fd);
-        write(1, "Ta mere\n", 25);
-        ft_free(&stru);
+        write(1, "Ta mere\n", 8);
+        ft_free(stru);
     }
     if (code == 3)
     {
         close(stru->data.fd);
         write(1, "Map invalide\n", 14);
-        ft_free(&stru);
+        ft_free(stru);
     }
 }
 

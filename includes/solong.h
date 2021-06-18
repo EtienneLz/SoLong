@@ -71,11 +71,13 @@ char	        *ft_strchr(const char *s, int c);
 char	        *ft_substr(char const *s, unsigned int start, size_t len);
 char	        *clean_line(char *save, char **line);
 char	        *ft_save(char *buffer, char *save);
-void            draw_player(double d_i, double d_j, t_struct *stru);
+void            draw_player(int pos_i, int pos_j, t_struct *stru);
 void            win_init(t_struct *stru);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int             ft_exit(void);
 void            input_loop(t_struct *stru);
-void            move_player(int direction, int axis, t_struct *stru);
+void            move_player(int direction, t_struct *stru);
+void            ft_error(int code, t_struct *stru);
+void            ft_free(t_struct *stru);
 
 #endif

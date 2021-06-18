@@ -33,28 +33,19 @@ static void     draw_square(int i, int j, t_struct *stru)
     }
 }
 
-void    draw_player(double d_i, double d_j, t_struct *stru)
+void    draw_player(int pos_i, int pos_j, t_struct *stru)
 {
     int p;
     int q;
     int j;
     int i;
 
-    if (stru->check_flags.init_done == 0)
-    {
-        j = stru->check_flags.s_pos_j;
-        i = stru->check_flags.s_pos_i;
-        stru->check_flags.pos_i = i;
-        stru->check_flags.pos_j = j;
-    }
-    else
-    {
-        j = d_j;
-        i = d_i;
-        stru->check_flags.pos_i = d_i;
-        stru->check_flags.pos_j = d_j;
-    }
-    printf("%f, %f bloup\n", d_i, d_j);
+    j = pos_j - 4;
+    i = pos_i - 4;
+    stru->check_flags.pos_i = pos_i;
+    stru->check_flags.pos_j = pos_j;
+
+    printf("%d, %d bloup\n", pos_i, pos_j);
     p = 0;
     while (p <= 9)
     {
@@ -81,7 +72,7 @@ void    win_init(t_struct *stru)
         j = 0;
         while (stru->map_data.map[i][j])
         {
-            draw_square(i, j, &stru);
+            draw_square(i, j, stru);
             j++;
         }
         i++;
@@ -90,6 +81,6 @@ void    win_init(t_struct *stru)
     {
         stru->check_flags.pos_i = stru->check_flags.s_pos_i;
         stru->check_flags.pos_j = stru->check_flags.s_pos_j;
-        draw_player(stru->check_flags.pos_i, stru->check_flags.pos_j, &stru);
+        draw_player(stru->check_flags.pos_i, stru->check_flags.pos_j, stru);
     }
 }

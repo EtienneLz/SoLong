@@ -1,22 +1,31 @@
-NAME = cub3D
+NAME = SoLong
 
 SRCS = srcs/init.c \
-			srcs/map_check.c
+			srcs/map_check.c \
 			srcs/get_next_line.c \
 			srcs/get_next_line_utils.c \
+			srcs/error.c \
+			srcs/input.c \
+			srcs/movement.c \
+			srcs/win_init.c \
 
 OBJS = srcs/init.o \
-			srcs/map_check.o
+			srcs/map_check.o \
 			srcs/get_next_line.o \
 			srcs/get_next_line_utils.o \
+			srcs/error.o \
+			srcs/input.o \
+			srcs/movement.o \
+			srcs/win_init.o \
+
 
 INCLUDES = -I/includes/solong.h
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Wextra -g
 
 GCC = gcc 
 
-LIB = libmlx_Linux.a -I./usr/include -L /usr/lib/ -Lmlx_linux -Imlx_linux -lXext -lX11 -lm
+LIB = minilibx-linux/libmlx_Linux.a -I./usr/include -L minilibx-linux -Lmlx_linux -Imlx_linux -lXext -lX11 -lm
 
 RM = rm -f
 

@@ -1,30 +1,21 @@
 #include "../includes/solong.h"
 
-static void    count_line(t_struct *stru, char *file_name)
+static void    count_line(t_struct *stru)
 {
     int ret;
     char *line;
-    int i;
 
-    i = 0;
     while ((ret = get_next_line(stru->data.fd, &line) != 0))
     {
-        if (stru->map_data.size_line_max < ft_strlen(line))
+        if ((unsigned int)stru->map_data.size_line_max < ft_strlen(line))
             stru->map_data.size_line_max = ft_strlen(line);
         stru->map_data.size_map++;
         free(line);
     }
+    stru->map_data.size_map++;
     close(stru->data.fd);
     if (!(stru->map_data.map = malloc(sizeof(char*) * (stru->map_data.size_map + 1))))
-        ft_error(2);
-    if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
-        ft_error(1);
-    while (i <= 9)
-    {
-        get_next_line(stru->data.fd, &line);
-        i++;
-        free(line);
-    }
+        ft_error(2, stru);
 }
 
 static void    parse_map(t_struct *stru)
@@ -39,10 +30,11 @@ static void    parse_map(t_struct *stru)
     while (ret != 0)
     {
         ret = get_next_line(stru->data.fd, &line);
+        //printf("%s", line);
         stru->map_data.map[i] = NULL;
         j = 0;
         if (!(stru->map_data.map[i] = malloc(sizeof(char) * (stru->map_data.size_line_max + 1))))
-            ft_error(1);
+            ft_error(1, stru);
         while (line[j])
         {
             if (line[j] == ' ' || line[j] == '1')
@@ -52,10 +44,10 @@ static void    parse_map(t_struct *stru)
             else if (line[j] == 'P' || line[j] == 'C' || line[j] == 'E')
                 stru->map_data.map[i][j] = line[j];
             else
-                ft_error(1);
+                ft_error(1, stru);
             j++;
         }
-        while (j < stru->map_data.size_line_max)
+        while (j < (unsigned int)stru->map_data.size_line_max)
             stru->map_data.map[i][j++] = ' ';
         stru->map_data.map[i][j] = '\0';
         free(line);
@@ -100,24 +92,24 @@ static void     ft_fill(char **frame, int i, int j, t_struct *stru)
     if (frame[i][j] == ' ')
     {
         free(frame);
-        ft_error(3);
+        ft_error(3, stru);
     }
     if (frame[i][j] == '0')
     {
         if (i == 0 || i == stru->var_mlx.size_map || j == 0 || j == (int)stru->var_mlx.size_line_max)
-            ft_error(3);
+            ft_error(3, stru);
         frame[i][j] = 'A';
-        ft_fill(frame, i + 1, j, &stru);
+        ft_fill(frame, i + 1, j, stru);
         if (i != 0)
-            ft_fill(frame, i - 1, j, &stru);
-        ft_fill(frame, i, j + 1, &stru);
+            ft_fill(frame, i - 1, j, stru);
+        ft_fill(frame, i, j + 1, stru);
         if (j != 0)
-            ft_fill(frame, i, j - 1, &stru);
+            ft_fill(frame, i, j - 1, stru);
     }
     else if (frame[i][j] != '1' && frame[i][j] != 'A')
     {
         free(frame);
-        ft_error(3);
+        ft_error(3, stru);
     }
 }
 
@@ -127,23 +119,21 @@ static void        check_map(t_struct *stru)
     int i;
 
     i = 0;
-    tmp = copy_map(&stru);
-    ft_fill(tmp, stru->check_flags.s_pos_i, stru->check_flags.s_pos_j, &stru);
+    tmp = copy_map(stru);
+    ft_fill(tmp, stru->check_flags.s_pos_i, stru->check_flags.s_pos_j, stru);
     while(tmp[i])
         free(tmp[i++]);
     free(tmp);
     if (stru->check_flags.s_pos_i == 0 && stru->check_flags.s_pos_j == 0)
-        ft_error(3);
+        ft_error(3, stru);
 }
 
 void    ft_file_read(char *file_name, t_struct *stru)
 {
-    char *line;
-
     if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
-        strerror(errno);
-    count_line(&stru, file_name);
-    parse_map(&stru);
+        ft_error(2, stru);
+    count_line(stru);
+    parse_map(stru);
     close(stru->data.fd);
-    check_map(&stru);
+    check_map(stru);
 }
