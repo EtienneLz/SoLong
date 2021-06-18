@@ -7,17 +7,21 @@ static void vars_init(t_struct *stru)
     stru->map_data.map = NULL;
     stru->data.res_x = 720;
     stru->data.res_y = 480;
+    stru->data.fd = 0;
     stru->check_flags.s_pos_i = 0;
     stru->check_flags.s_pos_j = 0;
     stru->check_flags.pos_i = 0;
     stru->check_flags.pos_j = 0;
-    stru->data.fd = 0;
     stru->check_flags.init_done = 0;
+    stru->var_mlx.size_case = 0;
+    stru->var_mlx.size_map = 0;
+    stru->var_mlx.size_line_max = 0;
 }
 
 int     main(int argc, char **argv)
 {
-    
+    t_struct  stru;
+    vars_init(&stru);
     if (argc != 2)
     {
         printf("bloupppp");
@@ -25,9 +29,6 @@ int     main(int argc, char **argv)
     }
     else
     {
-        
-        t_struct  stru;
-        vars_init(&stru);
         ft_file_read(argv[1], &stru);
         write(1, "bloup", 5);
         stru.var_mlx.mlx = mlx_init();

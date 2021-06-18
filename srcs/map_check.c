@@ -5,6 +5,7 @@ static void    count_line(t_struct *stru)
     int ret;
     char *line;
 
+    line = NULL;
     while ((ret = get_next_line(stru->data.fd, &line) != 0))
     {
         if ((unsigned int)stru->map_data.size_line_max < ft_strlen(line))
@@ -12,10 +13,7 @@ static void    count_line(t_struct *stru)
         stru->map_data.size_map++;
         free(line);
     }
-    stru->map_data.size_map++;
     close(stru->data.fd);
-    if (!(stru->map_data.map = malloc(sizeof(char*) * (stru->map_data.size_map + 1))))
-        ft_error(2, stru);
 }
 
 static void    parse_map(t_struct *stru)
@@ -27,22 +25,29 @@ static void    parse_map(t_struct *stru)
 
     i = 0;
     ret = 1;
-    while (ret != 0)
+    line = NULL;
+    if (!(stru->map_data.map = malloc(sizeof(char*) * (stru->map_data.size_map + 1))))
+        ft_error(2, stru);
+    while ((ret = get_next_line(stru->data.fd, &line)) > 0)
     {
-        ret = get_next_line(stru->data.fd, &line);
-        //printf("%s", line);
-        stru->map_data.map[i] = NULL;
         j = 0;
+        stru->map_data.map[i] = NULL;
         if (!(stru->map_data.map[i] = malloc(sizeof(char) * (stru->map_data.size_line_max + 1))))
-            ft_error(1, stru);
+            ft_error(1, stru);              
         while (line[j])
         {
             if (line[j] == ' ' || line[j] == '1')
                 stru->map_data.map[i][j] = line[j];
             else if (line[j] == '0')
                 stru->map_data.map[i][j] = '0';
-            else if (line[j] == 'P' || line[j] == 'C' || line[j] == 'E')
+            else if (line[j] == 'C' || line[j] == 'E')
                 stru->map_data.map[i][j] = line[j];
+            else if (line[j] == 'P')
+            {
+                stru->check_flags.s_pos_i = i;
+                stru->check_flags.s_pos_j = j;
+                stru->map_data.map[i][j] = line[j];
+            }
             else
                 ft_error(1, stru);
             j++;
@@ -75,8 +80,6 @@ static char     **copy_map(t_struct *stru)
             if (stru->map_data.map[i][j] == 'C' || stru->map_data.map[i][j] == 'P'
             || stru->map_data.map[i][j] == 'E')
             {
-                stru->check_flags.s_pos_i = i;
-                stru->check_flags.s_pos_j = j;
                 tmp_map[i][j] = '0';
             }
             j++;
@@ -133,7 +136,9 @@ void    ft_file_read(char *file_name, t_struct *stru)
     if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
         ft_error(2, stru);
     count_line(stru);
+    //write(1, "bloup", 5);
     parse_map(stru);
+    //write(1, "bloup", 5);
     close(stru->data.fd);
     check_map(stru);
 }
