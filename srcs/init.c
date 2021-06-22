@@ -13,9 +13,6 @@ static void vars_init(t_struct *stru)
     stru->check_flags.pos_i = 0;
     stru->check_flags.pos_j = 0;
     stru->check_flags.init_done = 0;
-    stru->var_mlx.size_case = 0;
-    stru->var_mlx.size_map = 0;
-    stru->var_mlx.size_line_max = 0;
 }
 
 int     main(int argc, char **argv)

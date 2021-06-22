@@ -39,8 +39,6 @@ typedef struct      s_var_mlx
 {
     void            *mlx;
     void            *win;
-    int             size_map;
-    size_t          size_line_max;
     int             size_case;
 }                   t_var_mlx;
 
@@ -79,5 +77,6 @@ void            input_loop(t_struct *stru);
 void            move_player(int direction, t_struct *stru);
 void            ft_error(int code, t_struct *stru);
 void            ft_free(t_struct *stru);
+void            err(void);
 
 #endif

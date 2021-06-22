@@ -1,5 +1,10 @@
 #include "../includes/solong.h"
 
+void    err(void)
+{
+    exit(EXIT_SUCCESS);
+}
+
 void    ft_error(int code, t_struct *stru)
 {
     write(1, "Erreur \n", 8);
