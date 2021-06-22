@@ -21,16 +21,15 @@ static void    parse_map(t_struct *stru)
 {
     int i;
     unsigned int j;
-    int ret;
     char *line;
 
     i = 0;
-    ret = 0;
     line = NULL;
     if (!(stru->map_data.map = malloc(sizeof(char*) * (stru->map_data.size_map + 1))))
         ft_error(2, stru);
-    while ((ret = get_next_line(stru->data.fd, &line)) > 0)
+    while (i <= stru->map_data.size_line_max)
     {
+        get_next_line(stru->data.fd, &line);
         j = 0;
         stru->map_data.map[i] = NULL;
         if (!(stru->map_data.map[i] = malloc(sizeof(char) * (stru->map_data.size_line_max + 1))))

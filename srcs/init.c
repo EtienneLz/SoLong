@@ -27,7 +27,7 @@ int     main(int argc, char **argv)
     else
     {
         ft_file_read(argv[1], &stru);
-        write(1, "bloup", 5);
+        write(1, "blooup", 6);
         stru.var_mlx.mlx = mlx_init();
         stru.var_mlx.size_case = stru.data.res_x / stru.map_data.size_line_max;
         
