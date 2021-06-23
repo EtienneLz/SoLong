@@ -19,7 +19,7 @@
 typedef struct      s_data 
 {
     void            *img;
-    char            *addr;
+    int            *addr;
     int             bits_per_pixel;
     int             line_length;
     int             endian;
@@ -71,7 +71,7 @@ char	        *clean_line(char *save, char **line);
 char	        *ft_save(char *buffer, char *save);
 void            draw_player(int pos_i, int pos_j, t_struct *stru);
 void            win_init(t_struct *stru);
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void            my_mlx_pixel_put(t_struct *stru, int x, int y, int color);
 int             ft_exit(void);
 void            input_loop(t_struct *stru);
 void            move_player(int direction, t_struct *stru);

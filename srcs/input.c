@@ -32,11 +32,11 @@ static int     key_released(int keycode, t_struct *stru)
 
 
 void            input_loop(t_struct *stru)
-{  
-    win_init(stru->var_mlx.mlx);
+{
+    stru->var_mlx.win = mlx_new_window(stru->var_mlx.mlx, stru->data.res_x, stru->data.res_y, "tHe BIndInG oF iSaAC : ANTiBIrtH");
+    win_init(stru);
     stru->check_flags.init_done = 1;
     printf("bloupppp");
-    stru->var_mlx.win = mlx_new_window(stru->var_mlx.mlx, stru->data.res_x, stru->data.res_y, "tHe BIndInG oF iSaAC : ANTiBIrtH");
     mlx_put_image_to_window(stru->var_mlx.mlx, stru->var_mlx.win, stru->data.img, 0, 0);
     mlx_hook(stru->var_mlx.win, 33, 1L << 17, ft_exit, &stru->var_mlx);
     mlx_hook(stru->var_mlx.win, 2, 1L<<0, key_pressed, &stru->var_mlx);

@@ -1,10 +1,10 @@
 #include "../includes/solong.h"
 
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void            my_mlx_pixel_put(t_struct *stru, int x, int y, int color)
 {
-    char    *dst;
+    int    *dst;
 
-    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+    dst = stru->data.addr + (y * stru->data.line_length + x * (stru->data.bits_per_pixel / 8));
     *(unsigned int*)dst = color;
 }
 
@@ -20,13 +20,13 @@ static void     draw_square(int i, int j, t_struct *stru)
         while (q <= stru->var_mlx.size_case)
         {
             if (stru->map_data.map[i][j] == '1')
-                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00999999);
+                my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00999999);
             else if (stru->map_data.map[i][j] == '0')
-                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
+                my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
             else if (stru->map_data.map[i][j] == ' ')
-                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00000000);
+                my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00000000);
             else
-                my_mlx_pixel_put(&stru->data, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
+                my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
             q++;
         }
         p++;
@@ -52,7 +52,7 @@ void    draw_player(int pos_i, int pos_j, t_struct *stru)
         q = 0;
         while (q <= 9)
         {
-            my_mlx_pixel_put(&stru->data, j + q, i + p, 0x00FF0000);
+            my_mlx_pixel_put(stru, j + q, i + p, 0x00FF0000);
             q++;
         }
         p++;
@@ -66,7 +66,7 @@ void    win_init(t_struct *stru)
 
     i = 0; 
     stru->data.img = mlx_new_image(stru->var_mlx.mlx, stru->data.res_x, stru->data.res_y);
-    stru->data.addr = mlx_get_data_addr(stru->data.img, &stru->data.bits_per_pixel, &stru->data.line_length, &stru->data.endian);
+    stru->data.addr = (int *)mlx_get_data_addr(stru->data.img, &stru->data.bits_per_pixel, &stru->data.line_length, &stru->data.endian);
     while (stru->map_data.map[i])
     {
         j = 0;
