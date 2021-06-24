@@ -21,17 +21,15 @@ int     main(int argc, char **argv)
     vars_init(&stru);
     if (argc != 2)
     {
-        printf("bloupppp");
         return (0);
     }
     else
     {
         ft_file_read(argv[1], &stru);
-        write(1, "blooup", 6);
         stru.var_mlx.mlx = mlx_init();
         stru.var_mlx.size_case = stru.data.res_x / stru.map_data.size_line_max;
-        
         input_loop(&stru);
     }
     return (0);
 }
+

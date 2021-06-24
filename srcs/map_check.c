@@ -2,17 +2,33 @@
 
 static void    count_line(t_struct *stru)
 {
+    int i;
     int ret;
     char *line;
+    int end_check;
+    int coin_check;
 
     line = NULL;
+    end_check = 0;
+    coin_check = 0;
     while ((ret = get_next_line(stru->data.fd, &line)) != 0)
     {
+        i = 0;
         if ((unsigned int)stru->map_data.size_line_max < ft_strlen(line))
             stru->map_data.size_line_max = ft_strlen(line);
         stru->map_data.size_map++;
+        while (line[i])
+        {
+            if (line[i] == 'E')
+                end_check = 1;
+            if (line[i] == 'C')
+                coin_check = 1;
+            i++;
+        }
         free(line);
     }
+    if (end_check == 0 || coin_check == 0)
+        ft_error(3, stru);
     stru->map_data.size_map++;
     close(stru->data.fd);
 }
@@ -27,7 +43,7 @@ static void    parse_map(t_struct *stru)
     line = NULL;
     if (!(stru->map_data.map = malloc(sizeof(char*) * (stru->map_data.size_map + 1))))
         ft_error(2, stru);
-    while (i <= stru->map_data.size_line_max)
+    while (i < stru->map_data.size_map)
     {
         get_next_line(stru->data.fd, &line);
         j = 0;
@@ -120,29 +136,14 @@ static void        check_map(t_struct *stru)
 {
     char **tmp;
     int i;
-    int p = 0;
-    int q = 0;
 
     i = 0;
     tmp = copy_map(stru);
-    printf("%d, %d\n", stru->map_data.size_map, stru->map_data.size_line_max);
-    while (p < stru->map_data.size_map)
-    {
-        q = 0;
-        while (q <= stru->map_data.size_line_max)
-        {
-            printf("%c", tmp[p][q]);
-            q++;
-        }
-        printf("\n");
-        p++;
-    }
-    printf("%d, %d\n", stru->check_flags.s_pos_i, stru->check_flags.s_pos_j);
     ft_fill(tmp, stru->check_flags.s_pos_i, stru->check_flags.s_pos_j, stru->map_data.size_line_max, stru->map_data.size_map);
     while (tmp[i])
         free(tmp[i++]);
     free(tmp);
-    if (stru->check_flags.s_pos_i == 0 && stru->check_flags.s_pos_j == 0)
+    if (stru->check_flags.s_pos_i == 0 || stru->check_flags.s_pos_j == 0)
         ft_error(3, stru);
 }
 
@@ -151,11 +152,9 @@ void    ft_file_read(char *file_name, t_struct *stru)
     if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
         ft_error(2, stru);
     count_line(stru);
-    //write(1, "bloup", 5);
     if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
         ft_error(2, stru);
     parse_map(stru);
-    //write(1, "bloup", 5);
     close(stru->data.fd);
     check_map(stru);
 }

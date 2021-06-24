@@ -17,22 +17,17 @@ static  int    check_collision(int direction, t_struct *stru)
         d_i = 1;
     else if (direction == 3)
         d_j = -1;
-    //printf("%d, %d\n", which_i, which_j);
- 
     which_i = stru->check_flags.pos_i + d_i;
     which_j = stru->check_flags.pos_j + d_j;
-    printf("%d, %d\n", which_i, which_j);
     if (stru->map_data.map[which_i][which_j] == '1')
         return (0);
-
+    if (stru->map_data.map[which_i][which_j] == 'C')
+        stru->map_data.map[which_i][which_j] = '0';
     return (1);
 }
 
 void            move_player(int direction, t_struct *stru)
 {
-    if (direction == 0)
-            return ;
-    
     if (check_collision(direction, stru))
     {
         win_init(stru);
