@@ -15,20 +15,15 @@ static int     key_pressed(int keycode, t_struct *stru)
     return (0);
 }
 
-static int	key_hook(int keycode, t_struct *stru)
-{
-	printf("%d\n", keycode);
-}
-
 void            input_loop(t_struct *stru)
 {
     stru->var_mlx.win = mlx_new_window(stru->var_mlx.mlx, stru->data.res_x, stru->data.res_y, "tHe BIndInG oF iSaAC : ANTiBIrtH");
     win_init(stru);
-    stru->check_flags.init_done = 1;
-    printf("%d, %d\n", stru->check_flags.pos_i, stru->check_flags.pos_j);
+
+    ft_putnbr_fd(stru->check_flags.nb_moves, 1);
+    write(1, "\n", 1);
     mlx_put_image_to_window(stru->var_mlx.mlx, stru->var_mlx.win, stru->data.img, 0, 0);
     mlx_hook(stru->var_mlx.win, 33, 1L << 17, ft_exit, stru);
-    //mlx_hook(stru->var_mlx.win, 2, 1L<<0, key_hook, stru);
     mlx_hook(stru->var_mlx.win, 2, 1L<<0, key_pressed, stru);
     mlx_loop(stru->var_mlx.mlx);
 }

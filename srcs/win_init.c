@@ -82,5 +82,6 @@ void    win_init(t_struct *stru)
         stru->check_flags.pos_i = stru->check_flags.s_pos_i;
         stru->check_flags.pos_j = stru->check_flags.s_pos_j;
         draw_player(stru->check_flags.pos_i, stru->check_flags.pos_j, stru);
+        stru->check_flags.init_done = 1;
     }
 }

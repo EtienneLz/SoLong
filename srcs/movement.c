@@ -22,7 +22,10 @@ static  int    check_collision(int direction, t_struct *stru)
     if (stru->map_data.map[which_i][which_j] == '1')
         return (0);
     if (stru->map_data.map[which_i][which_j] == 'C')
+    {
         stru->map_data.map[which_i][which_j] = '0';
+        stru->check_flags.coin_left--;
+    }
     return (1);
 }
 
@@ -38,7 +41,11 @@ void            move_player(int direction, t_struct *stru)
         if (direction == 2)
             draw_player(stru->check_flags.pos_i + 1, stru->check_flags.pos_j, stru);
         if (direction == 3)
-            draw_player(stru->check_flags.pos_i, stru->check_flags.pos_j - 1, stru);          
+            draw_player(stru->check_flags.pos_i, stru->check_flags.pos_j - 1, stru);
+        stru->check_flags.nb_moves++;
+        //ft_putnbr_fd(stru->check_flags.nb_moves, 1);
+        write(1, "\n", 1);
+        printf("%d\n", stru->check_flags.coin_left);
         mlx_put_image_to_window(stru->var_mlx.mlx, stru->var_mlx.win, stru->data.img, 0, 0);
     }
 }

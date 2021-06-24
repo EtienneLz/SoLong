@@ -8,6 +8,7 @@ SRCS = srcs/init.c \
 			srcs/input.c \
 			srcs/movement.c \
 			srcs/win_init.c \
+			srcs/utils.c \
 
 OBJS = srcs/init.o \
 			srcs/map_check.o \
@@ -17,6 +18,7 @@ OBJS = srcs/init.o \
 			srcs/input.o \
 			srcs/movement.o \
 			srcs/win_init.o \
+			srcs/utils.o \
 
 
 INCLUDES = -I/includes/solong.h

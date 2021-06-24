@@ -48,6 +48,8 @@ typedef struct      s_check_flags
     int             pos_j;
     int             s_pos_i;
     int             s_pos_j;
+    int             nb_moves;
+    int             coin_left;
     int             init_done;
 }                   t_check_flags;
 
@@ -78,5 +80,6 @@ void            move_player(int direction, t_struct *stru);
 void            ft_error(int code, t_struct *stru);
 void            ft_free(t_struct *stru);
 void            err(void);
+void		    ft_putnbr_fd(int n, int fd);
 
 #endif

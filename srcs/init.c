@@ -13,6 +13,8 @@ static void vars_init(t_struct *stru)
     stru->check_flags.pos_i = 0;
     stru->check_flags.pos_j = 0;
     stru->check_flags.init_done = 0;
+    stru->check_flags.nb_moves = 0;
+    stru->check_flags.coin_left = 0;
 }
 
 int     main(int argc, char **argv)

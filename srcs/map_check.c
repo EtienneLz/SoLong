@@ -22,7 +22,10 @@ static void    count_line(t_struct *stru)
             if (line[i] == 'E')
                 end_check = 1;
             if (line[i] == 'C')
+            {
                 coin_check = 1;
+                stru->check_flags.coin_left++;
+            }
             i++;
         }
         free(line);
