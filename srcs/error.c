@@ -28,11 +28,34 @@ void    ft_error(int code, t_struct *stru)
     }
 }
 
-void ft_free(t_struct *stru)
+int ft_free(t_struct *stru)
 {
+    int i;
+
+    i = 0;
     if (stru->map_data.map)
+    {
+        while (stru->map_data.map[i])
+        {
+            free(stru->map_data.map[i]);
+            i++;
+        }
         free(stru->map_data.map);
+    }
+    if (stru->texture[0].img)
+        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[0].img);
+    if (stru->texture[1].img)
+        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[1].img);
+    if (stru->texture[2].img)
+        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[2].img);
+    if (stru->texture[3].img)
+        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[3].img);
+    if (stru->texture[4].img)
+        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[4].img);
+    mlx_destroy_image(stru->var_mlx.mlx, stru->data.img);
+    mlx_destroy_window(stru->var_mlx.mlx, stru->var_mlx.win);
     ft_exit();
+    return (0);
 }
 
 int ft_exit(void)

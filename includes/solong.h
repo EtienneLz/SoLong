@@ -23,6 +23,8 @@ typedef struct      s_data
     int             bits_per_pixel;
     int             line_length;
     int             endian;
+    int             height;
+    int             width;
     int             res_x;
     int             res_y;
     int             fd;
@@ -60,6 +62,7 @@ typedef struct      s_struct
     t_map_data      map_data;
     t_var_mlx       var_mlx;
     t_check_flags   check_flags;
+    t_data          texture[5];
 }                   t_struct;
 
 void            ft_file_read(char *file_name, t_struct *stru);
@@ -78,8 +81,11 @@ int             ft_exit(void);
 void            input_loop(t_struct *stru);
 void            move_player(int direction, t_struct *stru);
 void            ft_error(int code, t_struct *stru);
-void            ft_free(t_struct *stru);
+int             ft_free(t_struct *stru);
 void            err(void);
 void		    ft_putnbr_fd(int n, int fd);
+unsigned int	mlx_get_pixel(t_struct *stru, int x, int y, int w_img);
+unsigned int	mlx_rgb_to_int(int o, int r, int g, int b);
+void            draw(t_struct *stru, int w_img, int i, int j);
 
 #endif
