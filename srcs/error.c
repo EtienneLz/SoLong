@@ -5,27 +5,11 @@ void    err(void)
     exit(EXIT_SUCCESS);
 }
 
-void    ft_error(int code, t_struct *stru)
+void    ft_error(t_struct *stru, char *msg)
 {
     write(1, "Erreur \n", 8);
-    if (code == 1)
-    {
-        close(stru->data.fd);
-        write(1, "Configuration invalide\n", 23);
-        ft_free(stru);
-    }
-    if (code == 2)
-    {
-        close(stru->data.fd);
-        write(1, "Ta mere\n", 8);
-        ft_free(stru);
-    }
-    if (code == 3)
-    {
-        close(stru->data.fd);
-        write(1, "Map invalide\n", 14);
-        ft_free(stru);
-    }
+    ft_putstr_fd(msg, 1);
+    ft_free(stru);   
 }
 
 int ft_free(t_struct *stru)
@@ -52,8 +36,15 @@ int ft_free(t_struct *stru)
         mlx_destroy_image(stru->var_mlx.mlx, stru->texture[3].img);
     if (stru->texture[4].img)
         mlx_destroy_image(stru->var_mlx.mlx, stru->texture[4].img);
-    mlx_destroy_image(stru->var_mlx.mlx, stru->data.img);
-    mlx_destroy_window(stru->var_mlx.mlx, stru->var_mlx.win);
+    if (stru->check.init_done == 1)
+    {
+        if (stru->data.img != 0)
+            mlx_destroy_image(stru->var_mlx.mlx, stru->data.img);
+        mlx_destroy_window(stru->var_mlx.mlx, stru->var_mlx.win);
+        mlx_destroy_display(stru->var_mlx.mlx);
+        mlx_loop_end(&stru->var_mlx);
+        free(stru->var_mlx.mlx);
+    }
     ft_exit();
     return (0);
 }

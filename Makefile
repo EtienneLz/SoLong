@@ -23,9 +23,9 @@ OBJS = srcs/init.o \
 
 INCLUDES = -I/includes/solong.h
 
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g
 
-GCC = gcc 
+GCC = gcc
 
 LIB = minilibx-linux/libmlx_Linux.a -I./usr/include -L minilibx-linux -Lmlx_linux -Imlx_linux -lXext -lX11 -lm
 

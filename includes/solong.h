@@ -44,7 +44,7 @@ typedef struct      s_var_mlx
     int             size_case;
 }                   t_var_mlx;
 
-typedef struct      s_check_flags
+typedef struct      s_check
 {
     int             pos_i;
     int             pos_j;
@@ -53,7 +53,7 @@ typedef struct      s_check_flags
     int             nb_moves;
     int             coin_left;
     int             init_done;
-}                   t_check_flags;
+}                   t_check;
 
 
 typedef struct      s_struct
@@ -61,31 +61,32 @@ typedef struct      s_struct
     t_data          data;
     t_map_data      map_data;
     t_var_mlx       var_mlx;
-    t_check_flags   check_flags;
+    t_check         check;
     t_data          texture[5];
 }                   t_struct;
 
-void            ft_file_read(char *file_name, t_struct *stru);
-int		        get_next_line(int fd, char **line);
-size_t	        ft_strlen(const char *s);
-char	        *ft_strjoin(char const *s1, char const *s2);
-char	        *ft_strdup(const char *s1);
-char	        *ft_strchr(const char *s, int c);
-char	        *ft_substr(char const *s, unsigned int start, size_t len);
-char	        *clean_line(char *save, char **line);
-char	        *ft_save(char *buffer, char *save);
-void            draw_player(int pos_i, int pos_j, t_struct *stru);
-void            win_init(t_struct *stru);
-void            my_mlx_pixel_put(t_struct *stru, int x, int y, int color);
-int             ft_exit(void);
-void            input_loop(t_struct *stru);
-void            move_player(int direction, t_struct *stru);
-void            ft_error(int code, t_struct *stru);
-int             ft_free(t_struct *stru);
-void            err(void);
-void		    ft_putnbr_fd(int n, int fd);
-unsigned int	mlx_get_pixel(t_struct *stru, int x, int y, int w_img);
-unsigned int	mlx_rgb_to_int(int o, int r, int g, int b);
-void            draw(t_struct *stru, int w_img, int i, int j);
+void                ft_file_read(char *file_name, t_struct *stru);
+int		            get_next_line(int fd, char **line);
+size_t	            ft_strlen(const char *s);
+char	            *ft_strjoin(char const *s1, char const *s2);
+char	            *ft_strdup(const char *s1);
+char	            *ft_strchr(const char *s, int c);
+char	            *ft_substr(char const *s, unsigned int start, size_t len);
+char	            *clean_line(char *save, char **line);
+char	            *ft_save(char *buffer, char *save);
+void                draw_player(int pos_i, int pos_j, t_struct *stru);
+void                win_init(t_struct *stru);
+void                my_mlx_pixel_put(t_struct *stru, int x, int y, int color);
+int                 ft_exit(void);
+void                input_loop(t_struct *stru);
+void                move_player(int direction, t_struct *stru);
+void                ft_error(t_struct *stru, char *msg);
+int                 ft_free(t_struct *stru);
+void                err(void);
+void		        ft_putnbr_fd(int n, int fd);
+unsigned int	    mlx_get_pixel(t_struct *stru, int x, int y, int w_img);
+unsigned int	    mlx_rgb_to_int(int o, int r, int g, int b);
+void                draw(t_struct *stru, int w_img, int i, int j);
+void	            ft_putstr_fd(char *s, int fd);
 
 #endif

@@ -20,7 +20,7 @@ void            input_loop(t_struct *stru)
     stru->var_mlx.win = mlx_new_window(stru->var_mlx.mlx, stru->data.res_x, stru->data.res_y, "tHe BIndInG oF iSaAC : ANTiBIrtH");
     win_init(stru);
 
-    ft_putnbr_fd(stru->check_flags.nb_moves, 1);
+    ft_putnbr_fd(stru->check.nb_moves, 1);
     write(1, "\n", 1);
     mlx_put_image_to_window(stru->var_mlx.mlx, stru->var_mlx.win, stru->data.img, 0, 0);
     mlx_hook(stru->var_mlx.win, 33, 1L << 17, ft_free, stru);

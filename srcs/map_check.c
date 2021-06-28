@@ -24,14 +24,15 @@ static void    count_line(t_struct *stru)
             if (line[i] == 'C')
             {
                 coin_check = 1;
-                stru->check_flags.coin_left++;
+                stru->check.coin_left++;
             }
             i++;
         }
         free(line);
     }
+    free(line);
     if (end_check == 0 || coin_check == 0)
-        ft_error(3, stru);
+        ft_error(stru, "Map invalide\nSortie ou piece manquante\n");
     stru->map_data.size_map++;
     close(stru->data.fd);
 }
@@ -45,14 +46,14 @@ static void    parse_map(t_struct *stru)
     i = 0;
     line = NULL;
     if (!(stru->map_data.map = malloc(sizeof(char*) * (stru->map_data.size_map + 1))))
-        ft_error(2, stru);
+        ft_error(stru, "Allocation de memoire echouee\n");
     while (i < stru->map_data.size_map)
     {
         get_next_line(stru->data.fd, &line);
         j = 0;
         stru->map_data.map[i] = NULL;
         if (!(stru->map_data.map[i] = malloc(sizeof(char) * (stru->map_data.size_line_max + 1))))
-            ft_error(1, stru);              
+            ft_error(stru, "Allocation de memoire echouee\n");              
         while (line[j])
         {
             if (line[j] == ' ' || line[j] == '1')
@@ -63,12 +64,12 @@ static void    parse_map(t_struct *stru)
                 stru->map_data.map[i][j] = line[j];
             else if (line[j] == 'P')
             {
-                stru->check_flags.s_pos_i = i;
-                stru->check_flags.s_pos_j = j;
+                stru->check.s_pos_i = i;
+                stru->check.s_pos_j = j;
                 stru->map_data.map[i][j] = line[j];
             }
             else
-                ft_error(1, stru);
+                ft_error(stru, "Map invalide\nCaractere inconnu\n");
             j++;
         }
         while (j < (unsigned int)stru->map_data.size_line_max)
@@ -98,9 +99,7 @@ static char     **copy_map(t_struct *stru)
             tmp_map[i][j] = stru->map_data.map[i][j];
             if (stru->map_data.map[i][j] == 'C' || stru->map_data.map[i][j] == 'P'
             || stru->map_data.map[i][j] == 'E')
-            {
                 tmp_map[i][j] = '0';
-            }
             j++;
         }
         i++;
@@ -142,21 +141,21 @@ static void        check_map(t_struct *stru)
 
     i = 0;
     tmp = copy_map(stru);
-    ft_fill(tmp, stru->check_flags.s_pos_i, stru->check_flags.s_pos_j, stru->map_data.size_line_max, stru->map_data.size_map);
+    ft_fill(tmp, stru->check.s_pos_i, stru->check.s_pos_j, stru->map_data.size_line_max, stru->map_data.size_map);
     while (tmp[i])
         free(tmp[i++]);
     free(tmp);
-    if (stru->check_flags.s_pos_i == 0 || stru->check_flags.s_pos_j == 0)
-        ft_error(3, stru);
+    if (stru->check.s_pos_i == 0 || stru->check.s_pos_j == 0)
+        ft_error(stru, "Map invalide\nPosition de depart manquante\n");
 }
 
 void    ft_file_read(char *file_name, t_struct *stru)
 {
     if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
-        ft_error(2, stru);
+        ft_error(stru, "Ouverture du fichier impossible\n");
     count_line(stru);
     if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
-        ft_error(2, stru);
+        ft_error(stru, "Ouverture du fichier impossible\n");
     parse_map(stru);
     close(stru->data.fd);
     check_map(stru);
