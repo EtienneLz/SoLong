@@ -1,22 +1,5 @@
 #include "../includes/solong.h"
 
-void            my_mlx_pixel_put(t_struct *stru, int x, int y, int color)
-{
-    char    *dst;
-    dst = stru->data.addr + (y * stru->data.line_length + x * (stru->data.bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
-}
-
-unsigned int	mlx_get_pixel(t_struct *stru, int x, int y, int w_img)
-{
-	return (*(unsigned int *)(stru->texture[w_img].addr + (x * stru->texture[w_img].bits_per_pixel / 8 + y * stru->texture[w_img].line_length)));
-}
-
-unsigned int	mlx_rgb_to_int(int o, int r, int g, int b)
-{
-	return (o << 24 | r << 16 | g << 8 | b);
-}
-
 void     draw(t_struct *stru, int w_img, int i, int j)
 {
     unsigned int color;
@@ -32,10 +15,8 @@ void     draw(t_struct *stru, int w_img, int i, int j)
             if (w_img != 5)
             {
                 color = mlx_get_pixel(stru, q, p, w_img);
-			    if (color != mlx_rgb_to_int(0, 255, 255, 255))
+			    if (color != mlx_rgb_to_int(0, 0, 0, 0))
 				    my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, color);
-                else
-                    printf("%x", color);
             }
             else
                 my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q, stru->var_mlx.size_case * i + p, 0x00FFFFFF);
@@ -57,31 +38,12 @@ static void     select_square(int i, int j, t_struct *stru)
     else if (stru->map_data.map[i][j] == 'E')
         draw(stru, 4, i, j);
     else if (stru->map_data.map[i][j] == 'C')
+    {
+        draw(stru, 2, i, j);
         draw(stru, 1, i, j);
+    }
     else
         draw(stru, 5, i, j);
-}
-
-void    draw_player(int pos_i, int pos_j, t_struct *stru)
-{
-    int p;
-    int q;
-
-    stru->check_flags.pos_i = pos_i;
-    stru->check_flags.pos_j = pos_j;
-
-    //printf("%d, %d bloup\n", pos_i, pos_j);
-    p = 0;
-    while (p < stru->var_mlx.size_case)
-    {
-        q = 0;
-        while (q < stru->var_mlx.size_case)
-        {
-            my_mlx_pixel_put(stru, stru->var_mlx.size_case * pos_j + q, stru->var_mlx.size_case * pos_i + p, 0x00FF0000);
-            q++;
-        }
-        p++;
-    }
 }
 
 static void texture_init(t_struct *stru)
@@ -128,7 +90,7 @@ void    win_init(t_struct *stru)
     }
     if (stru->check_flags.init_done == 0)
         {
-            draw_player(stru->check_flags.pos_i, stru->check_flags.pos_j, stru);            
+            draw(stru, 0, stru->check_flags.pos_i, stru->check_flags.pos_j);            
             stru->check_flags.init_done = 1;
         }
 }

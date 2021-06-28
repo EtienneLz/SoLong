@@ -34,7 +34,7 @@ int     main(int argc, char **argv)
         ft_file_read(argv[1], &stru);
         stru.var_mlx.mlx = mlx_init();
         stru.data.res_x = stru.map_data.size_line_max * stru.var_mlx.size_case;
-        stru.data.res_y = stru.map_data.size_map * stru.var_mlx.size_case;
+        stru.data.res_y = (stru.map_data.size_map) * stru.var_mlx.size_case;
         input_loop(&stru);
     }
     return (0);
