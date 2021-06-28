@@ -1,55 +1,55 @@
 #include "../includes/solong.h"
 
-void    err(void)
+static	void	ft_free_alt(t_struct *stru)
 {
-    exit(EXIT_SUCCESS);
+	if (stru->data.img != 0)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->data.img);
+	mlx_destroy_window(stru->var_mlx.mlx, stru->var_mlx.win);
+	mlx_destroy_display(stru->var_mlx.mlx);
+	mlx_loop_end(&stru->var_mlx);
+	free(stru->var_mlx.mlx);
 }
 
-void    ft_error(t_struct *stru, char *msg)
+void	err(void)
 {
-    write(1, "Erreur \n", 8);
-    ft_putstr_fd(msg, 1);
-    ft_free(stru);   
+	exit(EXIT_SUCCESS);
 }
 
-int ft_free(t_struct *stru)
+void	ft_error(t_struct *stru, char *msg)
 {
-    int i;
-
-    i = 0;
-    if (stru->map_data.map)
-    {
-        while (stru->map_data.map[i])
-        {
-            free(stru->map_data.map[i]);
-            i++;
-        }
-        free(stru->map_data.map);
-    }
-    if (stru->texture[0].img)
-        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[0].img);
-    if (stru->texture[1].img)
-        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[1].img);
-    if (stru->texture[2].img)
-        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[2].img);
-    if (stru->texture[3].img)
-        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[3].img);
-    if (stru->texture[4].img)
-        mlx_destroy_image(stru->var_mlx.mlx, stru->texture[4].img);
-    if (stru->check.init_done == 1)
-    {
-        if (stru->data.img != 0)
-            mlx_destroy_image(stru->var_mlx.mlx, stru->data.img);
-        mlx_destroy_window(stru->var_mlx.mlx, stru->var_mlx.win);
-        mlx_destroy_display(stru->var_mlx.mlx);
-        mlx_loop_end(&stru->var_mlx);
-        free(stru->var_mlx.mlx);
-    }
-    ft_exit();
-    return (0);
+	write(1, "Erreur \n", 8);
+	ft_putstr_fd(msg, 1);
+	ft_free(stru);
 }
 
-int ft_exit(void)
+int	ft_free(t_struct *stru)
 {
-    exit(EXIT_SUCCESS);
+	int	i;
+
+	i = -1;
+	if (stru->map_data.map)
+	{
+		while (stru->map_data.map[++i])
+			free(stru->map_data.map[i]);
+		free(stru->map_data.map);
+	}
+	if (stru->texture[0].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[0].img);
+	if (stru->texture[1].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[1].img);
+	if (stru->texture[2].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[2].img);
+	if (stru->texture[3].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[3].img);
+	if (stru->texture[4].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[4].img);
+	if (stru->check.init_done == 1)
+		ft_free_alt(stru);
+	ft_exit();
+	return (0);
+}
+
+int	ft_exit(void)
+{
+	exit(EXIT_SUCCESS);
 }

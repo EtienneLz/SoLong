@@ -1,7 +1,7 @@
 #ifndef SOLONG_H
 # define SOLONG_H
 
-# include "../minilibx-linux/mlx.h" 
+# include "../minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -16,54 +16,54 @@
 # define LEFT		    97
 # define BUFFER_SIZE    4096
 
-typedef struct      s_data 
+typedef struct		s_data
 {
-    void            *img;
-    char            *addr;
-    int             bits_per_pixel;
-    int             line_length;
-    int             endian;
-    int             height;
-    int             width;
-    int             res_x;
-    int             res_y;
-    int             fd;
-}                   t_data;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				height;
+	int				width;
+	int				res_x;
+	int				res_y;
+	int				fd;
+}					t_data;
 
 typedef struct      s_map_data
 {
-    char            **map;
-    int             size_map;
-    int             size_line_max;
+	char			**map;
+	int				size_map;
+	int				size_line_max;
 }                   t_map_data;
 
-typedef struct      s_var_mlx 
+typedef struct      s_var_mlx
 {
-    void            *mlx;
-    void            *win;
-    int             size_case;
-}                   t_var_mlx;
+	void			*mlx;
+	void			*win;
+	int				size_case;
+}					t_var_mlx;
 
 typedef struct      s_check
 {
-    int             pos_i;
-    int             pos_j;
-    int             s_pos_i;
-    int             s_pos_j;
-    int             nb_moves;
-    int             coin_left;
-    int             init_done;
-}                   t_check;
+	int				pos_i;
+	int				pos_j;
+	int				s_pos_i;
+	int				s_pos_j;
+	int				nb_moves;
+	int				coin_left;
+	int				init_done;
+}					t_check;
 
 
 typedef struct      s_struct
 {
-    t_data          data;
-    t_map_data      map_data;
-    t_var_mlx       var_mlx;
-    t_check         check;
-    t_data          texture[5];
-}                   t_struct;
+	t_data			data;
+	t_map_data		map_data;
+	t_var_mlx		var_mlx;
+	t_check			check;
+	t_data			texture[5];
+}					t_struct;
 
 void                ft_file_read(char *file_name, t_struct *stru);
 int		            get_next_line(int fd, char **line);
