@@ -42,11 +42,15 @@ char	*ft_save(char *buffer, char *save)
 	return (save);
 }
 
-int	read_line(int fd, char *buffer, char *save)
+int	get_next_line(int fd, char **line)
 {
-	int	r_return;
+	static char		*save_red[4096];
+	int				r_return;
+	char			buffer[BUFFER_SIZE + 1];
 
 	r_return = 1;
+	if (fd < 0 || BUFFER_SIZE < 1 || line == NULL || read(fd, buffer, 0) < 0)
+		return (-1);
 	while (r_return > 0)
 	{
 		r_return = read(fd, buffer, BUFFER_SIZE);
@@ -55,22 +59,8 @@ int	read_line(int fd, char *buffer, char *save)
 		buffer[r_return] = '\0';
 		save_red[fd] = ft_save(buffer, save_red[fd]);
 		if (ft_strchr(buffer, '\n'))
-			return (r_return);
+			break ;
 	}
-	return (r_return);
-}
-
-int	get_next_line(int fd, char **line)
-{
-	static char		*save_red[4096];
-	int				r_return;
-	char			buffer[BUFFER_SIZE + 1];
-
-	if (fd < 0 || BUFFER_SIZE < 1 || line == NULL || read(fd, buffer, 0) < 0)
-		return (-1);
-	r_return = read_line(fd, buffer, save);
-	if (r_return < 0)
-		return (-1);
 	if (save_red[fd] == 0)
 	{
 		*line = ft_strdup("");

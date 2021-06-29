@@ -33,16 +33,16 @@ int	ft_free(t_struct *stru)
 			free(stru->map_data.map[i]);
 		free(stru->map_data.map);
 	}
-	if (stru->texture[0].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[0].img);
-	if (stru->texture[1].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[1].img);
-	if (stru->texture[2].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[2].img);
-	if (stru->texture[3].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[3].img);
-	if (stru->texture[4].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->texture[4].img);
+	if (stru->tex[0].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[0].img);
+	if (stru->tex[1].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[1].img);
+	if (stru->tex[2].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[2].img);
+	if (stru->tex[3].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[3].img);
+	if (stru->tex[4].img)
+		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[4].img);
 	if (stru->check.init_done == 1)
 		ft_free_alt(stru);
 	ft_exit();
