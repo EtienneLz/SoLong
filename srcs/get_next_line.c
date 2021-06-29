@@ -42,7 +42,7 @@ char	*ft_save(char *buffer, char *save)
 	return (save);
 }
 
-int	read_line(int fd, char *buffer, char *save)
+int	read_line(int fd, char *buffer, char **save_red)
 {
 	int	r_return;
 
@@ -68,7 +68,7 @@ int	get_next_line(int fd, char **line)
 
 	if (fd < 0 || BUFFER_SIZE < 1 || line == NULL || read(fd, buffer, 0) < 0)
 		return (-1);
-	r_return = read_line(fd, buffer, save);
+	r_return = read_line(fd, buffer, &save_red[fd]);
 	if (r_return < 0)
 		return (-1);
 	if (save_red[fd] == 0)
