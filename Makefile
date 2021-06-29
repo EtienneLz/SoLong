@@ -7,7 +7,7 @@ SRCS = srcs/init.c \
 			srcs/error.c \
 			srcs/input.c \
 			srcs/movement.c \
-			srcs/win_init.c \
+			srcs/win_refresh.c \
 			srcs/utils.c \
 
 OBJS = srcs/init.o \
@@ -17,7 +17,7 @@ OBJS = srcs/init.o \
 			srcs/error.o \
 			srcs/input.o \
 			srcs/movement.o \
-			srcs/win_init.o \
+			srcs/win_refresh.o \
 			srcs/utils.o \
 
 

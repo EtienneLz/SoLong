@@ -20,7 +20,7 @@ typedef struct s_data
 {
 	void			*img;
 	char			*addr;
-	int				bits_per_pixel;
+	int				bbp;
 	int				line_length;
 	int				endian;
 	int				height;
@@ -61,7 +61,7 @@ typedef struct s_struct
 	t_map_data		map_data;
 	t_var_mlx		var_mlx;
 	t_check			check;
-	t_data			texture[5];
+	t_data			tex[5];
 }					t_struct;
 
 void				ft_file_read(char *file_name, t_struct *stru);
@@ -74,7 +74,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*clean_line(char *save, char **line);
 char				*ft_save(char *buffer, char *save);
 void				draw_player(int pos_i, int pos_j, t_struct *stru);
-void				win_init(t_struct *stru);
+void				win_refresh(t_struct *stru);
 void				my_mlx_pixel_put(t_struct *stru, int x, int y, int color);
 int					ft_exit(void);
 void				input_loop(t_struct *stru);
@@ -87,5 +87,10 @@ unsigned int		mlx_get_pixel(t_struct *stru, int x, int y, int w_img);
 unsigned int		mlx_rgb_to_int(int o, int r, int g, int b);
 void				draw(t_struct *stru, int w_img, int i, int j);
 void				ft_putstr_fd(char *s, int fd);
+void				check_map(t_struct *stru);
+void				ft_fill(char **frame, int i, int j, size_t size_line_max, int size_map);
+char				**copy_map(t_struct *stru);
+void				select_square(int i, int j, t_struct *stru);
+void				texture_init(t_struct *stru);
 
 #endif

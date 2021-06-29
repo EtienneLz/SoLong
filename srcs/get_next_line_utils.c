@@ -1,8 +1,8 @@
 #include "../includes/solong.h"
 
-size_t			ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -10,7 +10,7 @@ size_t			ft_strlen(const char *s)
 	return (i);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*dest;
 	int		i;
@@ -31,7 +31,7 @@ char			*ft_strjoin(char const *s1, char const *s2)
 	return (dest);
 }
 
-char			*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	int		size;
 	char	*dest;
@@ -50,7 +50,7 @@ char			*ft_strdup(const char *s1)
 	return (dest);
 }
 
-char			*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 
@@ -66,7 +66,7 @@ char			*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char			*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*dest;
