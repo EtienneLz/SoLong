@@ -37,12 +37,12 @@ typedef struct s_map_data
 	int				size_line_max;
 }					t_map_data;
 
-typedef struct s_var_mlx
+typedef struct s_var
 {
 	void			*mlx;
 	void			*win;
 	int				size_case;
-}					t_var_mlx;
+}					t_var;
 
 typedef struct s_check
 {
@@ -60,7 +60,7 @@ typedef struct s_struct
 {
 	t_data			data;
 	t_map_data		map_data;
-	t_var_mlx		var_mlx;
+	t_var		var;
 	t_check			check;
 	t_data			tex[5];
 }					t_struct;

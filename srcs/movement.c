@@ -47,8 +47,8 @@ void	move_player(int direction, t_struct *stru)
 		stru->check.nb_moves++;
 		ft_putnbr_fd(stru->check.nb_moves, 1);
 		write(1, "\n", 1);
-		mlx_put_image_to_window(stru->var_mlx.mlx,
-			stru->var_mlx.win, stru->data.img, 0, 0);
+		mlx_put_image_to_window(stru->var.mlx,
+			stru->var.win, stru->data.img, 0, 0);
 		if (ret == 2 && stru->check.coin_left == 0)
 			ft_free(stru);
 	}

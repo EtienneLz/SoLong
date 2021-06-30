@@ -13,7 +13,7 @@ static void	vars_init(t_struct *stru)
 	stru->check.init_done = 0;
 	stru->check.nb_moves = 0;
 	stru->check.coin_left = 0;
-	stru->var_mlx.size_case = 48;
+	stru->var.size_case = 48;
 	stru->data.img = NULL;
 	stru->tex[0].img = NULL;
 	stru->tex[1].img = NULL;
@@ -25,10 +25,10 @@ static void	vars_init(t_struct *stru)
 
 void	check_line(t_struct *stru, int i, char *line)
 {
-	unsigned int j;
+	unsigned int	j;
 
 	j = 0;
-	while(line[j])
+	while (line[j])
 	{
 		if (line[j] == ' ' || line[j] == '1')
 			stru->map_data.map[i][j] = line[j];
@@ -88,9 +88,9 @@ int	main(int argc, char **argv)
 	else
 	{
 		ft_file_read(argv[1], &stru);
-		stru.var_mlx.mlx = mlx_init();
-		stru.data.res_x = stru.map_data.size_line_max * stru.var_mlx.size_case;
-		stru.data.res_y = (stru.map_data.size_map) * stru.var_mlx.size_case;
+		stru.var.mlx = mlx_init();
+		stru.data.res_x = stru.map_data.size_line_max * stru.var.size_case;
+		stru.data.res_y = (stru.map_data.size_map) * stru.var.size_case;
 		input_loop(&stru);
 	}
 	return (0);

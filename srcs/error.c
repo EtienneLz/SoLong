@@ -3,11 +3,11 @@
 static	void	ft_free_alt(t_struct *stru)
 {
 	if (stru->data.img != 0)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->data.img);
-	mlx_destroy_window(stru->var_mlx.mlx, stru->var_mlx.win);
-	mlx_destroy_display(stru->var_mlx.mlx);
-	mlx_loop_end(&stru->var_mlx);
-	free(stru->var_mlx.mlx);
+		mlx_destroy_image(stru->var.mlx, stru->data.img);
+	mlx_destroy_window(stru->var.mlx, stru->var.win);
+	mlx_destroy_display(stru->var.mlx);
+	mlx_loop_end(&stru->var);
+	free(stru->var.mlx);
 }
 
 void	err(void)
@@ -34,15 +34,15 @@ int	ft_free(t_struct *stru)
 		free(stru->map_data.map);
 	}
 	if (stru->tex[0].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[0].img);
+		mlx_destroy_image(stru->var.mlx, stru->tex[0].img);
 	if (stru->tex[1].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[1].img);
+		mlx_destroy_image(stru->var.mlx, stru->tex[1].img);
 	if (stru->tex[2].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[2].img);
+		mlx_destroy_image(stru->var.mlx, stru->tex[2].img);
 	if (stru->tex[3].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[3].img);
+		mlx_destroy_image(stru->var.mlx, stru->tex[3].img);
 	if (stru->tex[4].img)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->tex[4].img);
+		mlx_destroy_image(stru->var.mlx, stru->tex[4].img);
 	if (stru->check.init_done == 1)
 		ft_free_alt(stru);
 	ft_exit();

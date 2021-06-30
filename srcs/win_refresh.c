@@ -7,21 +7,21 @@ void	draw(t_struct *stru, int w_img, int i, int j)
 	int				q;
 
 	p = 0;
-	while (p <= stru->var_mlx.size_case)
+	while (p <= stru->var.size_case)
 	{
 		q = 0;
-		while (q <= stru->var_mlx.size_case)
+		while (q <= stru->var.size_case)
 		{
 			if (w_img != 5)
 			{
 				color = mlx_get_pixel(stru, q, p, w_img);
 				if (color != mlx_rgb_to_int(0, 255, 255, 255))
-					my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q,
-						stru->var_mlx.size_case * i + p, color);
+					my_mlx_pixel_put(stru, stru->var.size_case * j + q,
+						stru->var.size_case * i + p, color);
 			}
 			else
-				my_mlx_pixel_put(stru, stru->var_mlx.size_case * j + q,
-					stru->var_mlx.size_case * i + p, 0x00FFFFFF);
+				my_mlx_pixel_put(stru, stru->var.size_case * j + q,
+					stru->var.size_case * i + p, 0x00FFFFFF);
 			q++;
 		}
 		p++;
@@ -49,6 +49,11 @@ void	select_square(int i, int j, t_struct *stru)
 
 static void	texture_init_2(t_struct *stru)
 {
+	stru->tex[4].img = mlx_xpm_file_to_image(stru->var.mlx,
+			"./textures/end.xpm", &(stru->tex[4].width),
+			&(stru->tex[4].height));
+	if (stru->tex[4].img == NULL)
+		ft_error(stru, "Texture invalide\n");
 	stru->tex[0].addr = mlx_get_data_addr(stru->tex[0].img, &stru->tex[0].bbp,
 			&stru->tex[0].line_length, &stru->tex[0].endian);
 	stru->tex[1].addr = mlx_get_data_addr(stru->tex[1].img, &stru->tex[1].bbp,
@@ -63,30 +68,25 @@ static void	texture_init_2(t_struct *stru)
 
 void	texture_init(t_struct *stru)
 {
-	stru->tex[0].img = mlx_xpm_file_to_image(stru->var_mlx.mlx, 
-			"./textures/player.xpm", &(stru->tex[0].width), 
+	stru->tex[0].img = mlx_xpm_file_to_image(stru->var.mlx,
+			"./textures/player.xpm", &(stru->tex[0].width),
 			&(stru->tex[0].height));
 	if (stru->tex[0].img == NULL)
 		ft_error(stru, "Texture invalide\n");
-	stru->tex[1].img = mlx_xpm_file_to_image(stru->var_mlx.mlx, 
-			"./textures/coin.xpm", &(stru->tex[1].width), 
+	stru->tex[1].img = mlx_xpm_file_to_image(stru->var.mlx,
+			"./textures/coin.xpm", &(stru->tex[1].width),
 			&(stru->tex[1].height));
 	if (stru->tex[1].img == NULL)
 		ft_error(stru, "Texture invalide\n");
-	stru->tex[2].img = mlx_xpm_file_to_image(stru->var_mlx.mlx, 
-			"./textures/floor.xpm", &(stru->tex[2].width), 
+	stru->tex[2].img = mlx_xpm_file_to_image(stru->var.mlx,
+			"./textures/floor.xpm", &(stru->tex[2].width),
 			&(stru->tex[2].height));
 	if (stru->tex[2].img == NULL)
 		ft_error(stru, "Texture invalide\n");
-	stru->tex[3].img = mlx_xpm_file_to_image(stru->var_mlx.mlx, 
-			"./textures/wall.xpm", &(stru->tex[3].width), 
+	stru->tex[3].img = mlx_xpm_file_to_image(stru->var.mlx,
+			"./textures/wall.xpm", &(stru->tex[3].width),
 			&(stru->tex[3].height));
 	if (stru->tex[3].img == NULL)
-		ft_error(stru, "Texture invalide\n");
-	stru->tex[4].img = mlx_xpm_file_to_image(stru->var_mlx.mlx, 
-			"./textures/end.xpm", &(stru->tex[4].width), 
-			&(stru->tex[4].height));
-	if (stru->tex[4].img == NULL)
 		ft_error(stru, "Texture invalide\n");
 	texture_init_2(stru);
 }
@@ -98,8 +98,8 @@ void	win_refresh(t_struct *stru)
 
 	i = 0;
 	if (stru->data.img != 0 && stru->check.init_done != 0)
-		mlx_destroy_image(stru->var_mlx.mlx, stru->data.img);
-	stru->data.img = mlx_new_image(stru->var_mlx.mlx,
+		mlx_destroy_image(stru->var.mlx, stru->data.img);
+	stru->data.img = mlx_new_image(stru->var.mlx,
 			stru->data.res_x, stru->data.res_y);
 	stru->data.addr = mlx_get_data_addr(stru->data.img, &stru->data.bbp,
 			&stru->data.line_length, &stru->data.endian);

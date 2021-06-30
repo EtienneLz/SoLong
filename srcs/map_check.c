@@ -43,7 +43,8 @@ static void	parse_map(t_struct *stru)
 	{
 		get_next_line(stru->data.fd, &line);
 		stru->map_data.map[i] = NULL;
-		stru->map_data.map[i] = malloc(sizeof(char) * (stru->map_data.size_line_max + 1));
+		stru->map_data.map[i] = malloc(sizeof(char)
+				 * (stru->map_data.size_line_max + 1));
 		if (stru->map_data.map[i] == NULL)
 			ft_error(stru, "Allocation de memoire echouee\n");
 		check_line(stru, i, line);
@@ -109,11 +110,13 @@ void	ft_fill(char **frame, int i, int j, size_t size_line_max, int size_map)
 
 void	ft_file_read(char *file_name, t_struct *stru)
 {
-	if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
+	stru->data.fd = open(file_name, O_RDONLY);
+	if (stru->data.fd == -1)
 		ft_error(stru, "Ouverture du fichier impossible\n");
 	count_line(stru);
 	close(stru->data.fd);
-	if ((stru->data.fd = open(file_name, O_RDONLY)) == -1)
+	stru->data.fd = open(file_name, O_RDONLY);
+	if (stru->data.fd == -1)
 		ft_error(stru, "Ouverture du fichier impossible\n");
 	parse_map(stru);
 	close(stru->data.fd);
