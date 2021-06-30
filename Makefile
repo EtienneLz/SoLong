@@ -10,16 +10,20 @@ SRCS = srcs/init.c \
 			srcs/win_refresh.c \
 			srcs/utils.c \
 
-OBJS = srcs/init.o \
-			srcs/map_check.o \
-			srcs/get_next_line.o \
-			srcs/get_next_line_utils.o \
-			srcs/error.o \
-			srcs/input.o \
-			srcs/movement.o \
-			srcs/win_refresh.o \
-			srcs/utils.o \
+SRCBONUS = srcs/init.c \
+			srcs/map_check.c \
+			srcs/get_next_line.c \
+			srcs/get_next_line_utils.c \
+			srcs/error.c \
+			srcs/input.c \
+			srcs/movement.c \
+			srcs_bonus/win_refresh_bonus.c \
+			srcs_bonus/itoa.c \
+			srcs/utils.c \
 
+OBJS = ${SRCS:.c=.o}
+
+OBJSBONUS = ${SRCBONUS:.c=.o}
 
 INCLUDES = -I/includes/solong.h
 
@@ -36,8 +40,11 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 		${GCC} ${CFLAGS} ${INCLUDES} ${OBJS} ${LIB} -o ${NAME}
 
+bonus: ${OBJSBONUS}
+		${GCC} ${CFLAGS} ${INCLUDES} ${OBJSBONUS} ${LIB} -o ${NAME}
+
 clean: 
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${OBJSBONUS}
 
 fclean: clean
 	${RM} ${NAME}

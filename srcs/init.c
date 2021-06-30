@@ -59,7 +59,7 @@ void	check_map(t_struct *stru)
 	i = 0;
 	tmp = copy_map(stru);
 	ft_fill(tmp, stru->check.s_pos_i, stru->check.s_pos_j,
-		stru->map_data.size_line_max, stru->map_data.size_map);
+		stru);
 	while (tmp[i])
 		free(tmp[i++]);
 	free(tmp);
@@ -79,13 +79,19 @@ void	ft_putstr_fd(char *s, int fd)
 int	main(int argc, char **argv)
 {
 	t_struct	stru;
+	int			i;
 
+	i = 0;
 	vars_init(&stru);
 	if (argc != 2)
 	{
+		write(1, "Erreur\nNombre d'argument incorrect\n", 35);
 		return (0);
 	}
-	else
+	while (argv[1][i] != '.')
+		i++;
+	if (argv[1][i + 1] == 'b' && argv[1][i + 2] == 'e'
+		&& argv[1][i + 3] == 'r' && argv[1][i + 4] == '\0')
 	{
 		ft_file_read(argv[1], &stru);
 		stru.var.mlx = mlx_init();
@@ -93,5 +99,7 @@ int	main(int argc, char **argv)
 		stru.data.res_y = (stru.map_data.size_map) * stru.var.size_case;
 		input_loop(&stru);
 	}
+	else
+		write(1, "Erreur\nFormat de map incorrect\n", 31);
 	return (0);
 }

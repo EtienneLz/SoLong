@@ -82,29 +82,30 @@ char	**copy_map(t_struct *stru)
 	return (tmp_map);
 }
 
-void	ft_fill(char **frame, int i, int j, size_t size_line_max, int size_map)
+void	ft_fill(char **frame, int i, int j, t_struct *stru)
 {
 	if (frame[i][j] == ' ')
 	{
 		free(frame);
-		err();
+		ft_error(stru, "Map non fermee");
 	}
 	if (frame[i][j] == '0')
 	{
-		if (i == 0 || i == size_map || j == 0 || j == (int)size_line_max)
+		if (i == 0 || i == stru->map_data.size_map || j == 0
+			 || j == stru->map_data.size_line_max)
 			err();
 		frame[i][j] = 'A';
-		ft_fill(frame, i + 1, j, size_line_max, size_map);
+		ft_fill(frame, i + 1, j, stru);
 		if (i != 0)
-			ft_fill(frame, i - 1, j, size_line_max, size_map);
-		ft_fill(frame, i, j + 1, size_line_max, size_map);
+			ft_fill(frame, i - 1, j, stru);
+		ft_fill(frame, i, j + 1, stru);
 		if (j != 0)
-			ft_fill(frame, i, j - 1, size_line_max, size_map);
+			ft_fill(frame, i, j - 1, stru);
 	}
 	else if (frame[i][j] != '1' && frame[i][j] != 'A')
 	{
 		free(frame);
-		err();
+		ft_error(stru, "Map non fermee");
 	}
 }
 

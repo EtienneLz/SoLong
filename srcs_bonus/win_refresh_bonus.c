@@ -110,5 +110,5 @@ void	win_refresh(t_struct *stru)
 			select_square(i, j, stru);
 		i++;
 	}
-	mlx_string_put(stru->var.mlx, stru->var.win, 10, 20, 0xFF000000, "16");
+	mlx_string_put(stru->var.mlx, stru->var.win, 10, 20, 0xFF000000, "COUCOU");
 }

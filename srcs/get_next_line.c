@@ -42,6 +42,14 @@ char	*ft_save(char *buffer, char *save)
 	return (save);
 }
 
+static int	get_next_line_2(char **line, char **save_red, int fd)
+{
+	*line = ft_strdup("");
+	free(save_red[fd]);
+	save_red[fd] = NULL;
+	return (0);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char		*save_red[4096];
@@ -62,12 +70,7 @@ int	get_next_line(int fd, char **line)
 			break ;
 	}
 	if (save_red[fd] == 0)
-	{
-		*line = ft_strdup("");
-		free(save_red[fd]);
-		save_red[fd] = NULL;
-		return (0);
-	}
+		get_next_line_2(line, &save_red[fd], fd);
 	save_red[fd] = clean_line(save_red[fd], line);
 	if (save_red[fd] == 0 && r_return <= 0)
 		return (r_return);
