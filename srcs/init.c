@@ -20,6 +20,35 @@ static void	vars_init(t_struct *stru)
 	stru->tex[2].img = NULL;
 	stru->tex[3].img = NULL;
 	stru->tex[4].img = NULL;
+	stru->check.end_check = 0;
+}
+
+void	check_line(t_struct *stru, int i, char *line)
+{
+	unsigned int j;
+
+	j = 0;
+	while(line[j])
+	{
+		if (line[j] == ' ' || line[j] == '1')
+			stru->map_data.map[i][j] = line[j];
+		else if (line[j] == '0')
+			stru->map_data.map[i][j] = '0';
+		else if (line[j] == 'C' || line[j] == 'E')
+			stru->map_data.map[i][j] = line[j];
+		else if (line[j] == 'P')
+		{
+			stru->check.s_pos_i = i;
+			stru->check.s_pos_j = j;
+			stru->map_data.map[i][j] = line[j];
+		}
+		else
+			ft_error(stru, "Map invalide\nCaractere inconnu\n");
+		j++;
+	}
+	while (j < (unsigned int)stru->map_data.size_line_max)
+		stru->map_data.map[i][j++] = ' ';
+	stru->map_data.map[i][j] = '\0';
 }
 
 void	check_map(t_struct *stru)

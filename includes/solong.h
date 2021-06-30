@@ -53,6 +53,7 @@ typedef struct s_check
 	int				nb_moves;
 	int				coin_left;
 	int				init_done;
+	int				end_check;
 }					t_check;
 
 typedef struct s_struct
@@ -92,5 +93,6 @@ void				ft_fill(char **frame, int i, int j, size_t size_line_max, int size_map);
 char				**copy_map(t_struct *stru);
 void				select_square(int i, int j, t_struct *stru);
 void				texture_init(t_struct *stru);
+void				check_line(t_struct *stru, int i, char *line);
 
 #endif
