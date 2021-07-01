@@ -87,7 +87,7 @@ void	ft_fill(char **frame, int i, int j, t_struct *stru)
 	if (frame[i][j] == ' ')
 	{
 		free(frame);
-		ft_error(stru, "Map non fermee");
+		ft_error(stru, "Map non fermée");
 	}
 	if (frame[i][j] == '0')
 	{
@@ -105,7 +105,7 @@ void	ft_fill(char **frame, int i, int j, t_struct *stru)
 	else if (frame[i][j] != '1' && frame[i][j] != 'A')
 	{
 		free(frame);
-		ft_error(stru, "Map non fermee");
+		ft_error(stru, "Map non fermée");
 	}
 }
 

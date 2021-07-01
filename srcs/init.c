@@ -43,7 +43,7 @@ void	check_line(t_struct *stru, int i, char *line)
 			stru->map_data.map[i][j] = line[j];
 		}
 		else
-			ft_error(stru, "Map invalide\nCaractere inconnu\n");
+			ft_error(stru, "Map invalide\nCaractère inconnu\n");
 		j++;
 	}
 	while (j < (unsigned int)stru->map_data.size_line_max)
@@ -64,7 +64,7 @@ void	check_map(t_struct *stru)
 		free(tmp[i++]);
 	free(tmp);
 	if (stru->check.s_pos_i == 0 || stru->check.s_pos_j == 0)
-		ft_error(stru, "Map invalide\nPosition de depart manquante\n");
+		ft_error(stru, "Map invalide\nPosition de départ manquante\n");
 }
 
 void	ft_putstr_fd(char *s, int fd)

@@ -91,10 +91,11 @@ void	texture_init(t_struct *stru)
 	texture_init_2(stru);
 }
 
-void	win_refresh(t_struct *stru)
+int	win_refresh(t_struct *stru)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*itoa;
 
 	i = 0;
 	if (stru->data.img != 0 && stru->check.init_done != 0)
@@ -110,5 +111,9 @@ void	win_refresh(t_struct *stru)
 			select_square(i, j, stru);
 		i++;
 	}
-	mlx_string_put(stru->var.mlx, stru->var.win, 10, 20, 0xFF000000, "COUCOU");
+	itoa = ft_itoa(stru->check.nb_moves);
+	mlx_string_put(stru->var.mlx, stru->var.win, 10, 20, 0xFF000000,
+		itoa);
+	free(itoa);
+	return (0);
 }

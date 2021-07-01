@@ -91,7 +91,7 @@ void	texture_init(t_struct *stru)
 	texture_init_2(stru);
 }
 
-void	win_refresh(t_struct *stru)
+int	win_refresh(t_struct *stru)
 {
 	int	i;
 	int	j;
@@ -110,5 +110,5 @@ void	win_refresh(t_struct *stru)
 			select_square(i, j, stru);
 		i++;
 	}
-	mlx_string_put(stru->var.mlx, stru->var.win, 10, 20, 0xFF000000, "16");
+	return (0);
 }

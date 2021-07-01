@@ -27,7 +27,7 @@ OBJSBONUS = ${SRCBONUS:.c=.o}
 
 INCLUDES = -I/includes/solong.h
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g 
 
 GCC = gcc
 

@@ -60,7 +60,7 @@ typedef struct s_struct
 {
 	t_data			data;
 	t_map_data		map_data;
-	t_var		var;
+	t_var			var;
 	t_check			check;
 	t_data			tex[5];
 }					t_struct;
@@ -75,7 +75,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*clean_line(char *save, char **line);
 char				*ft_save(char *buffer, char *save);
 void				draw_player(int pos_i, int pos_j, t_struct *stru);
-void				win_refresh(t_struct *stru);
+int					win_refresh(t_struct *stru);
 void				my_mlx_pixel_put(t_struct *stru, int x, int y, int color);
 int					ft_exit(void);
 void				input_loop(t_struct *stru);

@@ -43,6 +43,8 @@ static void	win_init(t_struct *stru)
 
 void	input_loop(t_struct *stru)
 {
+	if (stru->data.res_x > 1920 || stru->data.res_y > 1080)
+		ft_error(stru, "Map invalide\nTaille trop grande\n");
 	stru->var.win = mlx_new_window(stru->var.mlx,
 			stru->data.res_x, stru->data.res_y, "MINECRAFT");
 	win_init(stru);
@@ -50,6 +52,7 @@ void	input_loop(t_struct *stru)
 	write(1, "\n", 1);
 	mlx_put_image_to_window(stru->var.mlx,
 		stru->var.win, stru->data.img, 0, 0);
+	mlx_loop_hook(stru->var.mlx, win_refresh, stru);
 	mlx_hook(stru->var.win, 33, 1L << 17, ft_free, stru);
 	mlx_hook(stru->var.win, 2, 1L << 0, key_pressed, stru);
 	mlx_loop(stru->var.mlx);
