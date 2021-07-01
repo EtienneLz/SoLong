@@ -25,6 +25,8 @@ OBJS = ${SRCS:.c=.o}
 
 OBJSBONUS = ${SRCBONUS:.c=.o}
 
+PATH_MLX = minilibx-linux
+
 INCLUDES = -I/includes/solong.h
 
 CFLAGS = -Wall -Wextra -Werror -g 
@@ -38,15 +40,19 @@ RM = rm -f
 all: ${NAME}
 
 ${NAME}: ${OBJS}
+		make -C $(PATH_MLX)
 		${GCC} ${CFLAGS} ${INCLUDES} ${OBJS} ${LIB} -o ${NAME}
 
 bonus: ${OBJSBONUS}
+		make -C $(PATH_MLX)
 		${GCC} ${CFLAGS} ${INCLUDES} ${OBJSBONUS} ${LIB} -o ${NAME}
 
-clean: 
+clean:
+	make -C $(PATH_MLX) clean
 	${RM} ${OBJS} ${OBJSBONUS}
 
 fclean: clean
+	make -C $(PATH_MLX) clean
 	${RM} ${NAME}
 
 re: fclean all
