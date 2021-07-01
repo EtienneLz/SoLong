@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_check.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/01 18:01:57 by elouchez          #+#    #+#             */
+/*   Updated: 2021/07/01 18:01:57 by elouchez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/solong.h"
 
 static void	count_line(t_struct *stru)
@@ -21,12 +33,12 @@ static void	count_line(t_struct *stru)
 				stru->check.end_check = 1;
 			if (line[i] == 'C')
 				stru->check.coin_left++;
+			if (line[i] == 'P')
+				stru->check.player_check++;
 			i++;
 		}
 		free(line);
 	}
-	if (stru->check.end_check == 0 || stru->check.coin_left == 0)
-		ft_error(stru, "Map invalide\nSortie ou piece manquante\n");
 }
 
 static void	parse_map(t_struct *stru)
@@ -115,6 +127,10 @@ void	ft_file_read(char *file_name, t_struct *stru)
 	if (stru->data.fd == -1)
 		ft_error(stru, "Ouverture du fichier impossible\n");
 	count_line(stru);
+	if (stru->check.end_check == 0 || stru->check.coin_left == 0)
+		ft_error(stru, "Map invalide\nSortie ou piece manquante\n");
+	if (stru->check.player_check > 1)
+		ft_error(stru, "Plus d'une position de départ\n");
 	close(stru->data.fd);
 	stru->data.fd = open(file_name, O_RDONLY);
 	if (stru->data.fd == -1)

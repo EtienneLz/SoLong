@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   win_refresh_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/01 18:01:10 by elouchez          #+#    #+#             */
+/*   Updated: 2021/07/01 18:02:28 by elouchez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/solong.h"
 
 void	draw(t_struct *stru, int w_img, int i, int j)
@@ -7,21 +19,15 @@ void	draw(t_struct *stru, int w_img, int i, int j)
 	int				q;
 
 	p = 0;
-	while (p <= stru->var.size_case)
+	while (p < stru->var.size_case)
 	{
 		q = 0;
-		while (q <= stru->var.size_case)
+		while (q < stru->var.size_case)
 		{
-			if (w_img != 5)
-			{
-				color = mlx_get_pixel(stru, q, p, w_img);
-				if (color != mlx_rgb_to_int(0, 255, 255, 255))
-					my_mlx_pixel_put(stru, stru->var.size_case * j + q,
-						stru->var.size_case * i + p, color);
-			}
-			else
+			color = mlx_get_pixel(stru, q, p, w_img);
+			if (color != mlx_rgb_to_int(0, 255, 255, 255))
 				my_mlx_pixel_put(stru, stru->var.size_case * j + q,
-					stru->var.size_case * i + p, 0x00FFFFFF);
+					stru->var.size_case * i + p, color);
 			q++;
 		}
 		p++;
@@ -30,12 +36,10 @@ void	draw(t_struct *stru, int w_img, int i, int j)
 
 void	select_square(int i, int j, t_struct *stru)
 {
-	if (stru->map_data.map[i][j] == '1')
+	if (stru->map_data.map[i][j] == '1' || stru->map_data.map[i][j] == ' ')
 		draw(stru, 3, i, j);
 	else if (stru->map_data.map[i][j] == '0' || stru->map_data.map[i][j] == 'P')
 		draw(stru, 2, i, j);
-	else if (stru->map_data.map[i][j] == ' ')
-		draw(stru, 5, i, j);
 	else if (stru->map_data.map[i][j] == 'E')
 		draw(stru, 4, i, j);
 	else if (stru->map_data.map[i][j] == 'C')
@@ -44,7 +48,7 @@ void	select_square(int i, int j, t_struct *stru)
 		draw(stru, 1, i, j);
 	}
 	else
-		draw(stru, 5, i, j);
+		draw(stru, 3, i, j);
 }
 
 static void	texture_init_2(t_struct *stru)

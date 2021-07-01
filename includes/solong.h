@@ -54,6 +54,7 @@ typedef struct s_check
 	int				coin_left;
 	int				init_done;
 	int				end_check;
+	int				player_check;
 }					t_check;
 
 typedef struct s_struct

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/01 18:01:43 by elouchez          #+#    #+#             */
+/*   Updated: 2021/07/01 18:01:44 by elouchez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/solong.h"
 
 static void	vars_init(t_struct *stru)
@@ -13,6 +25,7 @@ static void	vars_init(t_struct *stru)
 	stru->check.init_done = 0;
 	stru->check.nb_moves = 0;
 	stru->check.coin_left = 0;
+	stru->check.player_check = 0;
 	stru->var.size_case = 48;
 	stru->data.img = NULL;
 	stru->tex[0].img = NULL;
