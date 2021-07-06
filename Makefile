@@ -1,4 +1,4 @@
-NAME = SoLong
+NAME = so_long
 
 SRCS = srcs/init.c \
 			srcs/map_check.c \
