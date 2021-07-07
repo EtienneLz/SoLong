@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:02:13 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/01 18:02:13 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/06 15:34:19 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,8 @@ int	win_refresh(t_struct *stru)
 			select_square(i, j, stru);
 		i++;
 	}
+	draw(stru, 0, stru->check.pos_i, stru->check.pos_j);
+	mlx_put_image_to_window(stru->var.mlx,
+		stru->var.win, stru->data.img, 0, 0);
 	return (0);
 }

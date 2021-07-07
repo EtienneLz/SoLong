@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:02:01 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/01 18:02:02 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/06 15:37:34 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	move_player(int direction, t_struct *stru)
 	ret = check_collision(direction, stru);
 	if (ret == 1 || ret == 2)
 	{
-		win_refresh(stru);
+		draw(stru, 2, stru->check.pos_i, stru->check.pos_j);
 		if (direction == 0)
 			stru->check.pos_i--;
 		if (direction == 1)
