@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:01:19 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/15 18:09:52 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/15 18:16:27 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	ft_free_alt(t_struct *stru)
 
 void	err(t_struct *stru, char **tmp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tmp[i])
