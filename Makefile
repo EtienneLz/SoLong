@@ -29,7 +29,7 @@ PATH_MLX = minilibx-linux
 
 INCLUDES = -I/includes/solong.h
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g 
 
 GCC = gcc
 

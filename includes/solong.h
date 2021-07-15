@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:18:57 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/01 18:18:58 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/15 17:55:02 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_check
 	int				init_done;
 	int				end_check;
 	int				player_check;
+	int				error;
 }					t_check;
 
 typedef struct s_struct
@@ -95,7 +96,6 @@ void				input_loop(t_struct *stru);
 void				move_player(int direction, t_struct *stru);
 void				ft_error(t_struct *stru, char *msg);
 int					ft_free(t_struct *stru);
-void				err(void);
 void				ft_putnbr_fd(int n, int fd);
 unsigned int		mlx_get_pixel(t_struct *stru, int x, int y, int w_img);
 unsigned int		mlx_rgb_to_int(int o, int r, int g, int b);

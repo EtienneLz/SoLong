@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:01:57 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/01 18:01:57 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/15 17:55:19 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_fill(char **frame, int i, int j, t_struct *stru)
 	{
 		if (i == 0 || i == stru->map_data.size_map || j == 0
 			 || j == stru->map_data.size_line_max)
-			err();
+			ft_error(stru, "Position de départ incorrecte");
 		frame[i][j] = 'A';
 		ft_fill(frame, i + 1, j, stru);
 		if (i != 0)
@@ -136,6 +136,8 @@ void	ft_file_read(char *file_name, t_struct *stru)
 	if (stru->data.fd == -1)
 		ft_error(stru, "Ouverture du fichier impossible\n");
 	parse_map(stru);
+	if (stru->check.error == 1)
+		ft_error(stru, "Map invalide\nCaractère inconnu\n");
 	close(stru->data.fd);
 	check_map(stru);
 }

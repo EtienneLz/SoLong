@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:01:43 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/01 18:01:44 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/15 17:53:30 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	vars_init(t_struct *stru)
 	stru->check.s_pos_j = 0;
 	stru->check.pos_i = 0;
 	stru->check.pos_j = 0;
+	stru->check.error = 0;
 	stru->check.init_done = 0;
 	stru->check.nb_moves = 0;
 	stru->check.coin_left = 0;
@@ -56,7 +57,7 @@ void	check_line(t_struct *stru, int i, char *line)
 			stru->map_data.map[i][j] = line[j];
 		}
 		else
-			ft_error(stru, "Map invalide\nCaractère inconnu\n");
+			stru->check.error = 1;
 		j++;
 	}
 	while (j < (unsigned int)stru->map_data.size_line_max)
