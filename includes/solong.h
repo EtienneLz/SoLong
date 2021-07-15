@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:18:57 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/15 17:55:02 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/15 18:08:07 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void				select_square(int i, int j, t_struct *stru);
 void				texture_init(t_struct *stru);
 void				check_line(t_struct *stru, int i, char *line);
 char				*ft_itoa(int n);
+void				err(t_struct *stru, char **tmp);
 
 #endif

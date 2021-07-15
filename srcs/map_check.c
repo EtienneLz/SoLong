@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:01:57 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/15 17:55:19 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/15 18:11:46 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,12 @@ char	**copy_map(t_struct *stru)
 void	ft_fill(char **frame, int i, int j, t_struct *stru)
 {
 	if (frame[i][j] == ' ')
-	{
-		free(frame);
-		ft_error(stru, "Map non fermée");
-	}
+		err(stru, frame);
 	if (frame[i][j] == '0')
 	{
 		if (i == 0 || i == stru->map_data.size_map || j == 0
 			 || j == stru->map_data.size_line_max)
-			ft_error(stru, "Position de départ incorrecte");
+			err(stru, frame);
 		frame[i][j] = 'A';
 		ft_fill(frame, i + 1, j, stru);
 		if (i != 0)
@@ -115,10 +112,7 @@ void	ft_fill(char **frame, int i, int j, t_struct *stru)
 			ft_fill(frame, i, j - 1, stru);
 	}
 	else if (frame[i][j] != '1' && frame[i][j] != 'A')
-	{
-		free(frame);
-		ft_error(stru, "Map non fermée");
-	}
+		err(stru, frame);
 }
 
 void	ft_file_read(char *file_name, t_struct *stru)
