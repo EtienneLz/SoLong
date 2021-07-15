@@ -6,7 +6,7 @@
 /*   By: elouchez <elouchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:01:10 by elouchez          #+#    #+#             */
-/*   Updated: 2021/07/15 17:25:40 by elouchez         ###   ########.fr       */
+/*   Updated: 2021/07/15 17:58:45 by elouchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,7 @@ int	win_refresh(t_struct *stru)
 			select_square(i, j, stru);
 		i++;
 	}
-	itoa = ft_itoa(stru->check.nb_moves);
 	draw(stru, 0, stru->check.pos_i, stru->check.pos_j);
-	mlx_string_put(stru->var.mlx, stru->var.win, 10, 20, 0xFF000000,
-		itoa);
-	free(itoa);
 	mlx_put_image_to_window(stru->var.mlx,
 		stru->var.win, stru->data.img, 0, 0);
 	return (0);
